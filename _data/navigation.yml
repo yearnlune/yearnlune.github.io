@@ -3,9 +3,10 @@ main:
   # - title: "Quick-Start Guide"
   #   url: https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/
   - title: "About"
-    url: https://yearnlune.github.io/About/
-#  - title: "Posts"
-#    url: /archive/
+#    url: https://yearnlune.github.io/about/
+    url: /about/
+#  - title: "IT Posts"
+#    url: /dream-factory/
   # - title: "Collections"
     # url: /collection-archive/
   # - title: "Sitemap"

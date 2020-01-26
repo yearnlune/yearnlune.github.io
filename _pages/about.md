@@ -1,10 +1,9 @@
 ---
-tags: about
+permalink: /about/
 title: About
 date: 2020/01/26
 author: 김동환
-description: About
-disabled: true
+author_profile: true
 ---
 Update...
 

@@ -49,3 +49,8 @@ $base0f: #b18a3d !default;
 .page__footer-follow .social-icons .svg-inline--fa {
   color: inherit;
 }
+
+a, a:visited {
+  color: $muted-text-color;
+  text-decoration: none;
+}

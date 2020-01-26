@@ -10,6 +10,12 @@
   {% assign title = post.title %}
 {% endif %}
 
+{% if post.date %}
+  {% assign date = post.date | date: "%b %d, %Y" %}
+{% else %}
+  {% assign date = "now" | date: "%b %d, %Y" %}
+{% endif %}
+
 <div class="{{ include.type | default: "list" }}__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     {% if include.type == "grid" and teaser %}
@@ -23,6 +29,8 @@
           alt="">
       </div>
     {% endif %}
+
+    <p class="page__meta__header">{{ date }} , {{ post.author }}</p>
     <h2 class="archive__item-title" itemprop="headline">
       {% if post.link %}
         <a href="{{ post.link }}">{{ title }}</a> <a href="{{ post.url | relative_url }}" rel="permalink"><i class="fas fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">Permalink</span></a>
@@ -33,6 +41,12 @@
     {% if post.read_time %}
       <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> {% include read-time.html %}</p>
     {% endif %}
-    {% if post.excerpt %}<p class="archive__item-excerpt" itemprop="description">{{ post.excerpt | markdownify | strip_html | truncate: 160 }}</p>{% endif %}
+    {% if post.description %}
+      <p class="archive__item-description" itemprop="description">{{ post.description | markdownify | strip_html | truncate: 160 }}</p>
+    {% else %}
+      <p class="archive__item-excerpt" itemprop="description">{{ post.excerpt | markdownify | strip_html | truncate: 160 }}</p>
+    {% endif %}
+
+    <hr>
   </article>
 </div>

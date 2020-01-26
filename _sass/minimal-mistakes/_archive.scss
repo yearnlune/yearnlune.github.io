@@ -41,6 +41,10 @@
   overflow: hidden;
   text-overflow: ellipsis;
 
+  a {
+    text-decoration: none;
+  }
+
   a::before {
     content: '';
     position: absolute;
@@ -52,6 +56,10 @@
 
   a + a {
     opacity: 0.5;
+  }
+
+  a:visited {
+    color: $muted-text-color;
   }
 }
 

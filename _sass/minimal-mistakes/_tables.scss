@@ -1,0 +1,42 @@
+/* ==========================================================================
+   TABLES
+   ========================================================================== */
+
+table {
+  margin-bottom: 1em;
+  font-family: $global-font-family;
+  font-size: $type-size-6;
+  border-collapse: collapse;
+  overflow: auto;
+  table-layout: auto;
+  width: 100%;
+
+  & + table {
+    margin-top: 1em;
+  }
+}
+
+thead {
+  background-color: rgba(0,0,0,0.6);
+  color: #fff;
+  border-bottom: 2px solid mix(#000, $border-color, 25%);
+}
+
+th {
+  padding: 0.5em;
+  font-weight: bold;
+  text-align: left;
+  border: 1px solid mix(#000, $border-color, 25%);
+}
+
+td {
+  padding: 0.5em;
+  border-bottom: 1px solid mix(#000, $border-color, 25%);
+  border: 1px solid mix(#000, $border-color, 25%);
+}
+
+tr,
+td,
+th {
+  vertical-align: middle;
+}

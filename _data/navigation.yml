@@ -5,9 +5,9 @@ main:
   - title: "About"
 #    url: https://yearnlune.github.io/about/
     url: /about/
-#  - title: "IT Posts"
-#    url: /dream-factory/
-  # - title: "Collections"
-    # url: /collection-archive/
+  - title: "Develop"
+    url: /dream-factory/
+  - title: "Book"
+    url: /book/
   # - title: "Sitemap"
     # url: /sitemap/

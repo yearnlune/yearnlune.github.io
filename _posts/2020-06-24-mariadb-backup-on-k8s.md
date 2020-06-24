@@ -5,7 +5,7 @@ tags:
     - k8s
     - kubernetes
 title: mariadb 백업(on k8s)
-date: 2020/01/27
+date: 2020/06/24
 author: 김동환
 description:  mariadb 백업(on k8s)
 disabled: false

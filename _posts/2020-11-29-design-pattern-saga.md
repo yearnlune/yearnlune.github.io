@@ -9,7 +9,7 @@ author: 김동환
 description:  SAGA Design Pattern
 disabled: false
 categories:
-  - General
+  - general
 ---
 
 > MSA(Microservices architecture)에서 트랜잭션을 처리하는 방법으로 각 서비스당 로컬 트랜잭션을 진행하며 메시지 또는 이벤트를 통해 다음 트랜잭션 단계로 진행하며, 다음 단계가 실패하면 보정 트랜잭션(rollback) 실행

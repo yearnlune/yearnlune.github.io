@@ -1,4 +1,4 @@
-# main links
+## main links
 main:
   # - title: "Quick-Start Guide"
   #   url: https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/
@@ -7,3 +7,16 @@ main:
     url: /about/
   # - title: "Sitemap"
     # url: /sitemap/
+
+## docs
+docs:
+  - title: Dream Factory
+    children:
+      - title: "General"
+        url: /docs/general/
+      - title: "Structure"
+        url: /docs/structure/
+      - title: "Installation"
+        url: /docs/installation/
+      - title: "Upgrading"
+        url: /docs/upgrading/

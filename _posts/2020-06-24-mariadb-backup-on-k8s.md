@@ -10,7 +10,7 @@ author: 김동환
 description:  mariadb 백업(on k8s)
 disabled: false
 categories:
-  - dream-factory
+  - mariadb
 ---
 
 ## mariadb pod 찾기

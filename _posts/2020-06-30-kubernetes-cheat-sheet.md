@@ -8,7 +8,7 @@ author: 김동환
 description:  쿠버네티스 치트시트
 disabled: false
 categories:
-  - dream-factory
+  - kubernetes
 ---
 # Kubernetes
 

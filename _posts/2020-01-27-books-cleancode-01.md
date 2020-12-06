@@ -8,7 +8,7 @@ author: 김동환
 description: 클린 코드(Clean Code) 리뷰 - 1장 깨끗한 코드
 disabled: false
 categories:
-  - dream-factory
+  - general
 ---
 
 ## 나쁜 코드를 경험하다. 그리고 나도 크게 다르지 않았다.

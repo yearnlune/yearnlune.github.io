@@ -285,7 +285,7 @@ defaults:
   # _posts
   - scope:
       path: ""
-      type: docs
+      type: posts
     values:
       layout: single
       author_profile: true

@@ -5,18 +5,14 @@ main:
   - title: "About"
 #    url: https://yearnlune.github.io/about/
     url: /about/
-  # - title: "Sitemap"
-    # url: /sitemap/
 
 ## docs
 docs:
   - title: Dream Factory
     children:
       - title: "General"
-        url: /docs/general/
-      - title: "Structure"
-        url: /docs/structure/
-      - title: "Installation"
-        url: /docs/installation/
-      - title: "Upgrading"
-        url: /docs/upgrading/
+        url: /categories/#general
+      - title: "Kubernetes"
+        url: /categories/#kubernetes
+      - title: "MariaDB"
+        url: /categories/#mariadb

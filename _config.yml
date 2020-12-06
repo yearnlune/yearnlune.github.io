@@ -308,6 +308,8 @@ defaults:
       comments: false
       share: false
       related: false
+      sidebar:
+        nav: "docs"
 
 #  - scope:
 #      path: "_posts"

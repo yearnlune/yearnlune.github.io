@@ -9,7 +9,7 @@ title: Java REST API Test
 date: 2020/12/20
 author: 김동환
 description:  자바 REST api 테스트 
-disabled: true
+disabled: false
 categories:
   - java
 ---
@@ -66,3 +66,41 @@ public class AccountControllerTest {
 `@AutoConfigureMockMvc` : `MockMvc`를 주입받을 수 있으며, @Controller 외에도 @Service, @Repository를 로드하여 통합테스트를 진행 할 수 있다. 
 
 `@WebMvcTest` : `MockMvc` 를 주입받을 수 있으며, @Controller, @ControllerAdvice, WebMvcConfigurer, filters 를 로드하여, 컨트롤러에 대한 테스트를 진행 할 수 있다. 그외 필요한 Bean들은 `@MockBean` 을 통해 주입할 수 있다.
+
+### MockMvc
+
+> Spring의 MVC의 동작을 테스트 할 수 있는 클래스
+
+```java
+    @Autowired
+    private MockMvc mockMvc;
+    
+    @Autowired
+    private ObjectMapper objectMapper;
+    
+    @Test
+    public void registerAccount_correctAccount_shouldBeCreated() throws Exception {
+        /* GIVEN */
+        String content = objectMapper.writeValueAsString(
+            AccountDTO.RegisterRequest.builder()
+                .id("object")
+                .name("오브젝트")
+                .password("object")
+                .build());
+    
+        /* WHEN */
+        mockMvc.perform(
+            post("/account")
+                .content(content)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8")
+                .accept(MediaType.APPLICATION_JSON)
+                .with(csrf())
+        )
+            
+        /* THEN */
+            .andDo(print())
+            .andExpect(content().encoding("UTF-8"))
+            .andExpect(status().isCreated());
+    }
+```

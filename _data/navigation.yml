@@ -12,6 +12,8 @@ docs:
     children:
       - title: "General"
         url: /categories/#general
+      - title: "Java"
+        url: /categories/#java
       - title: "Kubernetes"
         url: /categories/#kubernetes
       - title: "MariaDB"

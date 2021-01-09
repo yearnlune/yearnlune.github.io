@@ -129,5 +129,5 @@ $ kubectl get pods --all-namespaces -o custom-columns=PodName:.metadata.name,Pod
 
 ```bash
 # kubectl get (events|ev) -n [NAMESPACE] --sort-by=.metadata.creationTimestamp
-$ kubectl get ev-n kube-system --sort-by=.metadata.creationTimestamp
+$ kubectl get ev -n kube-system --sort-by=.metadata.creationTimestamp
 ```

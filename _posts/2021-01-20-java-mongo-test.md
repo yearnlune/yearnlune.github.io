@@ -9,7 +9,7 @@ title: Java MongoDB Test
 date: 2021/01/20
 author: 김동환
 description:  자바 MongoDB 테스트 
-disabled: true
+disabled: false
 categories:
   - java
 ---
@@ -44,7 +44,7 @@ public abstract class MongoDbTestSupport {
 }
 ```
 
-`**@DataMongoTest` :** MongoDB의 컴포넌트들을 중점적으로 테스트할 수 있으며, 기본적으로 in-memory DB를 사용한다. `@ActiveProfiles`와 같이 Configuration을 정의하면 실제 MongoDB 테스트에 연관된 정보를 활용한다.
+`@DataMongoTest` : MongoDB의 컴포넌트들을 중점적으로 테스트할 수 있으며, 기본적으로 in-memory DB를 사용한다. `@ActiveProfiles`와 같이 Configuration을 정의하면 실제 MongoDB 테스트에 연관된 정보를 활용한다.
 
 ## 따라해보기
 

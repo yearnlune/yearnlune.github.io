@@ -16,6 +16,7 @@ categories:
   - node
 ---
 > Mocha는 Node.js에서 사용하는 JavaScript 테스트 프레임웍으로 쉽게 테스트 코드를 작성할 수 있으며, 비동기 테스트가 가능하다. Assertion모듈은 포함되어있지 않아, node에서 제공하는 `assert`를 사용하거나 `Chai` 와 같은 라이브러리를 사용할 수 있다. BDD, TDD 등의 인터페이스를 제공하고 있다.
+
 　
 # 설치
 

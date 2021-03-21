@@ -95,6 +95,77 @@ afterEach(function() {
 ```
 
 　
+# 따라해보기
+
+## 디렉토리 구조 예시
+
+```json
+├─node_modules
+├─src
+│  ├─graphql
+│  ├─handler
+│  ├─model
+│  ├─repository
+│  ├─schema
+│  └─service
+└─test
+    └─repository
+```
+
+## Test 기본 설정
+
+```json
+// package.json
+{
+	//...
+	"scripts": {
+		"test": "mocha --require ts-node/register test/**/*.test.ts",
+	}
+	//...
+}
+```
+
+## Test 작성 예시
+
+```tsx
+// report-repository.test.ts
+
+import {expect} from "chai";
+import {reportRepository} from "../../src/repository/report-repository"
+import * as mongodb from "../../src/handler/mongodb";
+
+describe("ReportRepository", () => {
+    before(async () => {
+        await mongodb.init().tryConnect();
+    })
+
+    it('findAllReportByCommandId', () => {
+        /* GIVEN */
+        const commandId: string = '60495ee4d4e35632f20579b6';
+
+        /* WHEN */
+        reportRepository.findAllReportByCommandId(commandId)
+            .then((reports) => {
+                /* THEN */
+                expect(reports.length).to.be.greaterThan(0);
+            });
+    });
+
+    it('findAllReportByParentId', () => {
+        /* GIVEN */
+        const parentId: string = '60495ee4d4e35632f20579b6';
+
+        /* WHEN */
+        reportRepository.findAllReportByParentId(parentId)
+            .then((reports) => {
+                /* THEN */
+                expect(reports.length).to.be.greaterThan(0);
+            });
+    });
+})
+```
+
+　
 # 참고문헌
 
 [https://mochajs.org/](https://mochajs.org/)

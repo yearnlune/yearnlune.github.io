@@ -90,6 +90,6 @@ consumer들을 하나 이상의 파티션에 할당하여 스케일링하며, �
 
 [https://kafka.apache.org/](https://kafka.apache.org/)
 
-[https://www.confluent.io/blog/kafka-fastest-messaging-system/?utm_medium=sem&utm_source=google&utm_campaign=ch.sem_br.nonbrand_tp.prs_tgt.kafka_mt.mbm_rgn.apac_lng.eng_dv.all&utm_term=%2Bkafka %2Brabbitmq&creative=&device=c&placement=&gclid=CjwKCAiAyc2BBhAaEiwA44-wWxk0yJTz5wLoAc72MrqxNaRy1dl-lrSV9jbBTlbMy3UxNZOUlut0-hoCndgQAvD_BwE](https://www.confluent.io/blog/kafka-fastest-messaging-system/?utm_medium=sem&utm_source=google&utm_campaign=ch.sem_br.nonbrand_tp.prs_tgt.kafka_mt.mbm_rgn.apac_lng.eng_dv.all&utm_term=%2Bkafka%20%2Brabbitmq&creative=&device=c&placement=&gclid=CjwKCAiAyc2BBhAaEiwA44-wWxk0yJTz5wLoAc72MrqxNaRy1dl-lrSV9jbBTlbMy3UxNZOUlut0-hoCndgQAvD_BwE)
+[https://www.confluent.io/blog/kafka-fastest-messaging-system](https://www.confluent.io/blog/kafka-fastest-messaging-system/)
 
 [https://www.cloudamqp.com/blog/2019-12-12-when-to-use-rabbitmq-or-apache-kafka.html](https://www.cloudamqp.com/blog/2019-12-12-when-to-use-rabbitmq-or-apache-kafka.html)

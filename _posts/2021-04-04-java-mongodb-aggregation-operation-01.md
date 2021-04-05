@@ -40,12 +40,8 @@ categories:
 */
 @Test
 public void 저자가_dave인_사용자찾기() {
-	/* GIVEN */
-	String author = "dave";
-
-	/* THEN */
 	MatchOperation matchOperation = Aggregation.match(
-		Criteria.where("author").is(author)
+		Criteria.where("author").is("dave")
 	);
 
 	Aggregation aggregation = Aggregation.newAggregation(
@@ -87,7 +83,6 @@ public void 저자가_dave인_사용자찾기() {
 */
 @Test
 public void 숙제점수_총합_필드추가() {
-	/* THEN */
 	AggregationExpression homeworkSumExpression = ArithmeticOperators.valueOf("homework").sum();
 
 	AddFieldsOperation addFieldsOperation = Aggregation.addFields()
@@ -227,7 +222,7 @@ public void 두개_이후의_레스토랑() {
 	mongoTemplate.aggregate(aggregation, "restaurants", Restaurant.class);
 }
 
-/*
+/* Results
 { "_id" : 3, "name" : "Empire State Pub", "borough" : "Brooklyn"}
 { "_id" : 4, "name" : "Stan's Pizzaria", "borough" : "Manhattan"}
 { "_id" : 5, "name" : "Jane's Deli", "borough" : "Brooklyn"}
@@ -264,7 +259,7 @@ public void 최대_세개까지의_레스토랑() {
 	mongoTemplate.aggregate(aggregation, "restaurants", Restaurant.class);
 }
 
-/*
+/* Results
 { "_id" : 1, "name" : "Central Park Cafe", "borough" : "Manhattan"}
 { "_id" : 2, "name" : "Rock A Feller Bar and Grill", "borough" : "Queens"}
 { "_id" : 3, "name" : "Empire State Pub", "borough" : "Brooklyn"}

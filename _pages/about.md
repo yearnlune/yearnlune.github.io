@@ -1,7 +1,7 @@
 ---
 permalink: /about/
 title: About
-date: 2020/01/26
+date: 2021/04/18
 author: 김동환
 author_profile: true
 ---

@@ -29,4 +29,10 @@ author_profile: true
 ![helm](/assets/images/techstack/helm.png)
 ![yaml](/assets/images/techstack/yaml.png)
 
+　
+# 2021 GOAL
+![kotlin](/assets/images/techstack/kotlin.png)
+![css3](/assets/images/techstack/css3.png)
+
+
 ---

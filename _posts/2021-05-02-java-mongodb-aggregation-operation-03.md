@@ -281,7 +281,7 @@ public void 카테고리화() {
 　
 # SetOperation
 
-> Document에 새로운 필드를 추가하는 `$addFieldsd` 와 동일한 `$set` 을 지원해준다.
+> Document에 새로운 필드를 추가하는 `$addFields` 와 동일한 `$set` 을 지원해준다.
 
 ```java
 { _id: 1, student: "Maya", homework: [ 10, 5, 10 ], quiz: [ 10, 8 ], extraCredit: 0 },

@@ -219,20 +219,20 @@ public void 각_주문의_재고정보() {
 
 ```java
 /*
-	db.scores.aggregate(
-	  [
-			{
-			  $match: {
-					score: {
-					  $gt: 80
-					}
-			  }
-			},
-			{
-			  $count: "passing_scores"
-			}
-	  ]
-	)
+  db.scores.aggregate(
+    [
+      {
+        $match: {
+          score: {
+            $gt: 80
+          }
+        }
+      },
+      {
+        $count: "passing_scores"
+      }
+    ]
+  )
 */
 @Test
 public void 점수가_80초과인_총_개수() {

@@ -5,16 +5,15 @@ tags:
     - 객체 지향
     - 절차 지향
 title: 클린 코드(Clean Code) 리뷰 - 06
-date: 2021/05/31
+date: 2021/06/16
 author: 김동환
 description: 클린 코드(Clean Code) 리뷰 - 6장 객체와 자료구조
-disabled: true
+disabled: false
 categories:
   - general
 ---
 
-> 요새들어 함수형 프로그래밍이 떠오르고 있지만, 많은 부분이 객체 지향 프로그래밍이 사용되고 있다.
-
+　
 # 객체
 
 ## 자료 추상화
@@ -24,38 +23,40 @@ categories:
 ```java
 // #1 구체적
 public class Point {
-	public double x;
-	public double y;
+    public double x;
+    public double y;
 }
 
 // #2 추상적
 public interface Point {
-	double getX();
-	double getY();
-	void setCartesian(double x, double y);
-	double getR();
-	double getTheta();
-	void setPolar(double r, double theta);
+    double getX();
+    double getY();
+    void setCartesian(double x, double y);
+    double getR();
+    double getTheta();
+    void setPolar(double r, double theta);
 }
 ```
 
 `#1` 해당 필드의 접근자를 `private` 으로 선언하고, `getter` , `setter` 를 제공한다해도 구현을 외부로 노출하는 셈이다. 계층을 통해서 완벽하게 감출 수 없으며, 추상화를 통해서만 가능하다. 그렇다면 단순히 `#2` 처럼 `get` 와 `set`를 제공하는 인터페이스가 좋은 추상화라고 생각 할 수 있을까? 다음을 살펴보자.
 
+　
 ```java
 // #3 조회
 public interface Vehicle {
-	double getFuelTankCapacityInGallons();
-	double getGallonsOfGasline();
+    double getFuelTankCapacityInGallons();
+    double getGallonsOfGasline();
 }
 
 // #4 추상적 개념
 public interface Vehicle {
-	double getPercentFuelRemaining();
+    double getPercentFuelRemaining();
 }
 ```
 
 `#3` 은 총량과 남은양을 가져올 수 있다. 하지만 데이터를 세세하게 공개하게 된다. `#4` 처럼 더욱 추상적인 개념을 통해서 표현하는 것이 더 좋은 방법이다.
 
+　
 ## 절차 지향 / 객체 지향
 
 우리 모두 객체 지향적으로 프로그래밍을 하려고 노력하고 있다. 하지만, 아직도 객체 지향 프로그래밍 언어를 가지고 절차 지향적으로 프로그래밍을 하는 경우가 종종 있다. 그렇다면 항상 절차 지향적인 프로그래밍은 나쁜 방법일까? 간단한 예를 살펴보자.
@@ -63,50 +64,50 @@ public interface Vehicle {
 ```java
 // #1 절차 지향적 프로그래밍
 public class Square {
-	public Point topLeft;
-	public double side;
+    public Point topLeft;
+    public double side;
 }
 
 public class Rectangle {
-	public Point topLeft;
-	public double height;
-	public double width;
+    public Point topLeft;
+    public double height;
+    public double width;
 }
 
 public class Geometry {
-	public double area(Object shape) throws NoSuchShapeException {
-		if (shape instanceof Square) {
-			Square s = (Square)shape;
-			return s.side * s.side;
-		} else if {
-			Rectangle r = (Rectangle)shape;
-			return r.height* r.width;
-		}
-	} else {
-		throws new NoSuchShapeException();
-	}
+    public double area(Object shape) throws NoSuchShapeException {
+        if (shape instanceof Square) {
+            Square s = (Square)shape;
+            return s.side * s.side;
+        } else if {
+            Rectangle r = (Rectangle)shape;
+            return r.height* r.width;
+        }
+    } else {
+        throws new NoSuchShapeException();
+    }
 }
 ```
 
 ```java
 // #2 객체 지향적 프로그래밍
 public class Square implements Shape {
-	private Point topLeft;
-	private double side;
-	
-	public double area() {
-		return side * side;
-	}
+    private Point topLeft;
+    private double side;
+    
+    public double area() {
+        return side * side;
+    }
 }
 
 public class Rectangle implements Shape {
-	private Point topLeft;
-	private double height;
-	private double width;
-
-	public double area() {
-		return height* width;
-	}
+    private Point topLeft;
+    private double height;
+    private double width;
+    
+    public double area() {
+        return height * width;
+    }
 }
 ```
 
@@ -139,27 +140,27 @@ public class Rectangle implements Shape {
 
 ```java
 public class C {
-	public void f() {}
-	public void example() { 
-		// 1. C 클래스 내에서의 f() 호출
-		f(); 
-	}
+    public void f() {}
+    public void example() { 
+        // 1. C 클래스 내에서의 f() 호출
+        f(); 
+    }
 }
 
 public class D {
-	C fieldC;
-
-	public void example(C paramC) {
-		// 2. g() 내에서의 생성한 c 객체의 f() 호출
-		C localC = new C();
-		localC.f();
-
-		// 3. 인수로 넘어온 c 객체의 f() 호출 
-		paramC.f();
-
-		// 4. D 클래스 필드에 선언된 c 객체의 f() 호출
-		fieldC.f();
-	}
+    C fieldC;
+    
+    public void example(C paramC) {
+        // 2. g() 내에서의 생성한 c 객체의 f() 호출
+        C localC = new C();
+        localC.f();
+    
+        // 3. 인수로 넘어온 c 객체의 f() 호출 
+        paramC.f();
+    
+        // 4. D 클래스 필드에 선언된 c 객체의 f() 호출
+        fieldC.f();
+    }
 }
 ```
 
@@ -179,6 +180,18 @@ String outputDir = scratchDir.getAbsolutePath();
 
 ### 기차 충돌과 메서드 체이닝
 
-빌더 패턴에서 쓰이는 메서드 체이닝과 유사하게 보일 수 있다. 계속적으로 메서드를 호출한다. 하지만 근본적으로 다른 점이 있다. 메서드 체이닝을 구현할 때 우리는 `this` 를 리턴해준다.
+빌더 패턴에서 쓰이는 메서드 체이닝과 유사하게 보일 수 있다. 계속적으로 메서드를 호출한다. 하지만 근본적으로 다른 점이 있다. 메서드 체이닝을 구현할 때 우리는 `this`를 리턴해준다.
 
 **즉 메서드 체이닝은 하나의 객체에서 자기 자신을 리턴함으로써 자신의 메서드를 호출하는 것이다. 위에서 알아본 기차 충돌은 자기 자신이 아닌 다른 객체의 호출을 연결한 것이다.**
+
+　
+# 자료구조
+
+## 자료 전달 객체
+
+자료 구조체의 전형적인 형태는 공개 변수만 있으며 특별한 함수가 존재하지 않는 클래스다. private 변수를 getter/setter를 통해 조작한다. 일반적으로 DTO(**D**ata **T**ransfer **O**bject)라 한다. DB의 데이터를 Application에서 사용할 데이터 형식으로 만들거나, 각종 통신의 과정(Request, Response)에서 흔히 쓰인다. 하지만 가끔 DTO내에서 일부 비즈니스 로직은 담은 함수를 구현한다. 이는 바람직하지 않다. DTO는 자료구조로 활용되어야 하며, 비즈니스 로직을 담은 객체를 따로 생성해야 한다.
+
+　
+# 마치며...
+
+객체와 자료구조에 대해서 알아보았다. 우리는 수없이 많은 객체와 자료구조를 생성하고 활용하고 있다. 객체는 객체답게 자료를 숨기면서 동작(함수)를 공개하고, 자료구조는 자료구조답게 활용해야한다. 또한 어떠한 시스템을 설계할 때 객체만을 고집할 것이 아니라, 자료타입(클래스)의 유연성이 필요한지, 동작(메서드)의 유연성이 필요한지에 따라 객체나 자료구조를 활용해야겠다.

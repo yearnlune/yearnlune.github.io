@@ -21,7 +21,6 @@ categories:
 　
 ## 기본 구조
 
-　
 ### ExpectedException 활용
 
 `org.junit.rules.ExpectedException`를 활용하여 Exception 테스트를 진행한다.

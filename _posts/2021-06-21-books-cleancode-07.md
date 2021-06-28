@@ -21,6 +21,21 @@ categories:
 
 try블록에서 어느 시점에서든 중단되면 catch블록으로 넘어간다. 즉 try블록은 트랜잭션과 비슷하다. try블록에서 이슈가 생기면 호출자가 기대하는 상태를 catch블록에 정의하기 쉽다. 자연스럽게 try블록의 트랜잭션 범위부터 구현하게 되어 트랜잭션 본질을 유지하기 쉬워진다.
 
+```java
+@EventListener
+public void handleOrder(OrderEvent event) {
+    try {
+        //...
+        validate(event);
+        //...
+    } catch (UnAuthroizedTokenException e) {
+        publisher.publish(new UnAuthroizedTokenEvent(e));
+    } catch (OrderNotFoundException e) {
+        publisher.publish(new OrderNotFoundEvent(e));
+    }
+}
+```
+
 ## 미확인 예외를 사용하라
 
 자바에서 확인된 예외(checked exception)를 활용하여 예외를 처리하는 것은 때로는 유용할 지도 모른다. 하지만 확인된 예외를 던져 처리를 한다면 그 메서드를 호출하는 상위 메서드들은 확인된 예외들을 던져야한다. 만약 새로운 예외를 추가한다면 상위 메서드를 모두 고쳐야 한다. 최하위해서 던지는 예외를 상위 메서드들이 알아야 하므로 캡슐화가 깨진다.

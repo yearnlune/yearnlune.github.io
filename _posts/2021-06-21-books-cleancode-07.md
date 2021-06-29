@@ -26,15 +26,15 @@ try블록에서 어느 시점에서든 중단되면 catch블록으로 넘어간�
 ```java
 @EventListener
 public void handleOrder(OrderEvent event) {
-	try {
-		//...
-		validate(event);
-		//...
-	} catch (UnAuthroizedTokenException e) {
-		publisher.publish(new UnAuthroizedTokenEvent(e));
-	} catch (OrderNotFoundException e) {
-		publisher.publish(new OrderNotFoundEvent(e));
-	}
+    try {
+        //...
+        validate(event);
+        //...
+    } catch (UnAuthroizedTokenException e) {
+        publisher.publish(new UnAuthroizedTokenEvent(e));
+    } catch (OrderNotFoundException e) {
+        publisher.publish(new OrderNotFoundEvent(e));
+    }
 }
 ```
 
@@ -51,22 +51,22 @@ C#, C++, 파이썬, 루비 등은 확인된 예외를 지원하지 않는다. �
 ```java
 // BAD CASE
 public void registerItem(Item item) {
-	if (item != null) {
-      ItemRegistry registry = persistentStore.getItemRegistry();
-      if (registry != null) {
-         Item existing = registry.getItem(item.getID());
-         if (existing.getBillingPeriod().hasRetailOwner()) {
-            existing.register(item);
-         }
-      }
-	}
+    if (item != null) {
+        ItemRegistry registry = persistentStore.getItemRegistry();
+        if (registry != null) {
+            Item existing = registry.getItem(item.getID());
+            if (existing.getBillingPeriod().hasRetailOwner()) {
+                existing.register(item);
+            }
+        }
+    }
 }
 
 // GOOD CASE
 public void getItems() {
-	List<Item> items;
-	// ... 
-	****return Optional.ofNullable(items).orElse(Collections.emptyList());
+    List<Item> items;
+    // ... 
+    return Optional.ofNullable(items).orElse(Collections.emptyList());
 }
 ```
 
@@ -76,7 +76,7 @@ public void getItems() {
 
 ```java
 public double xProjection(Point p1, Point p2) {
-	return (p2.x - p1.x) * 1.5;
+    return (p2.x - p1.x) * 1.5;
 }
 ```
 
@@ -85,19 +85,19 @@ public double xProjection(Point p1, Point p2) {
 ```java
 // CASE #1 Exception
 public double xProjection(Point p1, Point p2) {
-   if (p1 == null || p2 == null) {
-      throw InvalidArgumentException("Invalid argument for MetricsCalculator.xProjection");
-   }
+    if (p1 == null || p2 == null) {
+        throw InvalidArgumentException("Invalid argument for MetricsCalculator.xProjection");
+    }
 
-	return (p2.x - p1.x) * 1.5;
+    return (p2.x - p1.x) * 1.5;
 }
 
 // CASE #2 assert
 public double xProjection(Point p1, Point p2) {
-	assert p1 != null : "p1 should not be null";
-	assert p2 != null : "p2 should not be null";
-
-	return (p2.x - p1.x) * 1.5;
+    assert p1 != null : "p1 should not be null";
+    assert p2 != null : "p2 should not be null";
+    
+    return (p2.x - p1.x) * 1.5;
 }
 ```
 

@@ -105,7 +105,7 @@ private String password;
 // application.yml
 spring
     datasource:
-        url: sqlite:example.db
+        url: jdbc:sqlite:example.db
         password: 7eff056138424802bbe296fe66022047
 ```
 

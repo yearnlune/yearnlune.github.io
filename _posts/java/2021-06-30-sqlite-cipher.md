@@ -91,7 +91,8 @@ public class ApplicationDatabase {
 }
 ```
 
-### URL & PASSWORD
+
+## URL & PASSWORD
 
 sqlite의 url과 password는 기존 application.yml에서 쉽게 사용할 수 있도록 `@Value`를 통해서 주입시킨다. 값이 없을 경우를 대비해 기본 값도 설정해 두었다.
 
@@ -109,7 +110,7 @@ spring
         password: 7eff056138424802bbe296fe66022047
 ```
 
-### SQLite Config
+## SQLite Config
 
 `@PostConstruct`를 활용하여 기본 템플릿을 제공해주는 `SQLiteMCConfig` 를 활용하여 원하는 sqlite config(Pragma)를 설정하였다. 아래는 `SQLCipher4`와 password를 설정하였으며. JournalMode를 설정하였다.
 
@@ -131,7 +132,7 @@ protected void initSqliteConfig() {
 　
 ![sqlite-table](/assets/images/sqlite-cipher/pragma.jpg)
 
-### DataSource
+## DataSource
 
 위에서 적용한 SQLite config를 토대로 Connection을 생성한다. 생성한 Connection을 Spring에서 제공하는 `SingleConnectionDataSource` 를 활용하여 DataSource를 주입하였다. 좀 더 디테일한 Connection 처리가 필요한 경우 `AbstractDataSource`를 상속받아 구현해주면 된다.
 
@@ -155,7 +156,7 @@ public DataSource getDataSource() {
 
 SQLite에서 활용할 Entity와 Repository를 구현한다.
 
-### Entity
+## Entity
 
 ```java
 @Entity
@@ -180,7 +181,8 @@ Hibernate: create table ot_config (key varchar(255) not null, value TEXT, primar
 　
 ![sqlite-table](/assets/images/sqlite-cipher/sqlite-table.png)
 
-### Repository
+
+## Repository
 
 ```java
 @Repository

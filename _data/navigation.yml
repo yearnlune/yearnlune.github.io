@@ -14,9 +14,13 @@ docs:
         url: /categories/#general
       - title: "Java"
         url: /categories/#java
+      - title: "JavaScript"
+        url: /categories/#javascript
       - title: "Node.js"
         url: /categories/#node
       - title: "Kubernetes"
         url: /categories/#kubernetes
       - title: "MariaDB"
         url: /categories/#mariadb
+      - title: "Git"
+        url: /categories/#git

@@ -25,7 +25,8 @@ sqlite-cihper를 spring의 DataSource로 주입하여 JPA를 활용하기
 3. @Bean DataSource 주입
 4. JPA 활용
 
-　
+> 예제 프로젝트: [https://github.com/yearnlune/sqlite-cipher-example](https://github.com/yearnlune/sqlite-cipher-example)
+
 # 테스트 환경
 
 - spring-boot 2.5.2

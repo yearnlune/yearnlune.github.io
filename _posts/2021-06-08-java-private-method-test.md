@@ -124,7 +124,7 @@ public class CalculatorTest {
 　
 ### @VisibleForTesting
 
-Google에서 제공하는 자바 공통 라이브러리인 `guava`에서는 `@VisibleForTesting`을 지원해준다. 위에서 살펴본 방식과는 달리 테스트를 위해서 접근 가능한 메소드로 설정하고, 실제 Production일 땐 `Private` 형태로 제공된다.
+Google에서 제공하는 자바 공통 라이브러리인 guava에서는 @VisibleForTesting을 지원해준다. 위에서 살펴본 방식과는 달리 테스트를 위해서 패키지내 접근 가능한(Package-private) 메소드로 설정하고, 테스트에 활용한다. 해당 메소드의 접근지정자가 Package-private인 이유를 알리기 위해(가시성) 해당 annotation을 사용한다.
 
 ```java
 @VisibleForTesting

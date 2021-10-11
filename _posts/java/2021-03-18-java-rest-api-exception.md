@@ -112,6 +112,7 @@ public class ExceptionResponse {
 }
 ```
 
+　
 ```java
 @PostMapping("/account")
 public ResponseEntity<AccountDTO.CommonResponse> registerAccount(

@@ -40,9 +40,9 @@ categories:
 @Test
 public void 각_점수_총합_구하기() {
     ProjectionOperation projectionOperation = Aggregation.project()
-        .and(AccumulatorOperators.Sum.sumOf("quizzes")).as("quizTotal")
-        .and(AccumulatorOperators.Sum.sumOf("labs")).as("labTotal")
-        .and(AccumulatorOperators.Sum.sumOf("final").and("midterm")).as("examTotal");
+        .and(AccumulatorOperators.valueOf("quizzes").sum()).as("quizTotal")
+        .and(AccumulatorOperators.valueOf("labs").sum()).as("labTotal")
+        .and(AccumulatorOperators.valueOf("final").sum().and("midterm")).as("examTotal");
     
     Aggregation aggregation = Aggregation.newAggregation(
         projectionOperation
@@ -84,9 +84,9 @@ public void 각_점수_총합_구하기() {
 @Test
 public void 각_점수_평균_구하기() {
     ProjectionOperation projectionOperation = Aggregation.project()
-        .and(AccumulatorOperators.Avg.avgOf("quizzes")).as("quizAvg")
-        .and(AccumulatorOperators.Avg.avgOf("labs")).as("labAvg")
-        .and(AccumulatorOperators.Avg.avgOf("final").and("midterm")).as("examAvg");
+        .and(AccumulatorOperators.valueOf("quizzes").avg()).as("quizAvg")
+        .and(AccumulatorOperators.valueOf("labs").avg()).as("labAvg")
+        .and(AccumulatorOperators.valueOf("final").avg().and("midterm")).as("examAvg");
 
     Aggregation aggregation = Aggregation.newAggregation(
         projectionOperation
@@ -128,9 +128,9 @@ public void 각_점수_평균_구하기() {
 @Test
 public void 각_점수_최대값_구하기() {
     ProjectionOperation projectionOperation = Aggregation.project()
-        .and(AccumulatorOperators.Max.maxOf("quizzes")).as("quizMax")
-        .and(AccumulatorOperators.Max.maxOf("labs")).as("labMax")
-        .and(AccumulatorOperators.Max.maxOf("final").and("midterm")).as("examMax");
+        .and(AccumulatorOperators.valueOf("quizzes").max()).as("quizMax")
+        .and(AccumulatorOperators.valueOf("labs").max()).as("labMax")
+        .and(AccumulatorOperators.valueOf("final").max().and("midterm")).as("examMax");
     
     Aggregation aggregation = Aggregation.newAggregation(
         projectionOperation
@@ -172,9 +172,9 @@ public void 각_점수_최대값_구하기() {
 @Test
 public void 각_점수_최소값_구하기() {
     ProjectionOperation projectionOperation = Aggregation.project()
-        .and(AccumulatorOperators.Min.minOf("quizzes")).as("quizMin")
-        .and(AccumulatorOperators.Min.minOf("labs")).as("labMin")
-        .and(AccumulatorOperators.Min.minOf("final").and("midterm")).as("examMin");
+        .and(AccumulatorOperators.valueOf("quizzes").min()).as("quizMin")
+        .and(AccumulatorOperators.valueOf("labs").min()).as("labMin")
+        .and(AccumulatorOperators.valueOf("final").min().and("midterm")).as("examMin");
     
     Aggregation aggregation = Aggregation.newAggregation(
         projectionOperation
@@ -226,7 +226,7 @@ public void 각_점수_최소값_구하기() {
 @Test
 public void 퀴즈_점수_표준편차_구하기() {
     ProjectionOperation projectionOperation = Aggregation.project()
-        .and(AccumulatorOperators.StdDevPop.stdDevPopOf("scores.score")).as("stdDev");
+        .and(AccumulatorOperators.valueOf("scores.score").stdDevPop()).as("stdDev");
     
     Aggregation aggregation = Aggregation.newAggregation(
         projectionOperation
@@ -277,7 +277,7 @@ public void 퀴즈_점수_표준편차_구하기() {
 @Test
 public void 퀴즈_점수_표본_표준편차_구하기() {
     ProjectionOperation projectionOperation = Aggregation.project()
-        .and(AccumulatorOperators.StdDevSamp.stdDevSampOf("scores.score")).as("stdDevSamp");
+        .and(AccumulatorOperators.valueOf("scores.score").stdDevSamp()).as("stdDevSamp");
     
     Aggregation aggregation = Aggregation.newAggregation(
         projectionOperation

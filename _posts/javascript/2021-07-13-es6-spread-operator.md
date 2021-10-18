@@ -22,8 +22,8 @@ Spread operator(`...`)는 배열이나 객체를 복사, 확장, 결합 등에 �
 
 ```jsx
 // ES6 이전
-function printArgs(x, y, z) { 
-    console.log(`x: ${x}, y: ${y}, z: ${z}`)
+function printArgs(x, y, z) {
+    console.log("x: " + x + ", y: " + y + ", z: " + z);
 }
 var args = [0, 1, 2];
 printArgs.apply(null, args);  // x: 0, y: 1, z: 2

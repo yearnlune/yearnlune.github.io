@@ -183,3 +183,136 @@ public void toLower() {
 	{ "_id" : 3, "item" : "XYZ1", "description" : "" }
 */
 ```
+
+```java
+{ "_id" : 1, "item" : "ABC1", quarter: "13Q1", "description" : "product 1" }
+{ "_id" : 2, "item" : "ABC2", quarter: "13Q4", "description" : "product 2" }
+{ "_id" : 3, "item" : "XYZ1", quarter: "14Q2", "description" : null }
+```
+
+```java
+/*
+  db.inventory.aggregate(
+    [
+      {
+        $project:
+            {
+              item: 1,
+              comparisonResult: { $strcasecmp: [ "$quarter", "13q4" ] }
+            }
+        }
+    ]
+  )
+*/
+@Test
+public void strcasecmp() {
+  ProjectionOperation projectionOperation = Aggregation.project()
+    .andInclude("item")
+    .and(StringOperators.valueOf("quarter").strCaseCmp("13q4")).as("comparisonResult");
+
+  Aggregation aggregation = Aggregation.newAggregation(
+    projectionOperation
+  );
+
+  mongoTemplate.aggregate(aggregation, "inventory", Inventory.class);
+}
+
+/*
+	{ "_id" : 1, "item" : "ABC1", "comparisonResult" : -1 }
+	{ "_id" : 2, "item" : "ABC2", "comparisonResult" : 0 }
+	{ "_id" : 3, "item" : "XYZ1", "comparisonResult" : 1 }
+*/
+```
+
+# $indexOfBytes
+
+```java
+{ "_id" : 1, "item" : "foo" }
+{ "_id" : 2, "item" : "fóofoo" }
+{ "_id" : 3, "item" : "the foo bar" }
+{ "_id" : 4, "item" : "hello world fóo" }
+{ "_id" : 5, "item" : null }
+{ "_id" : 6, "amount" : 3 }
+```
+
+```java
+/*
+  db.inventory.aggregate(
+    [
+      {
+        $project:
+            {
+              byteLocation: { $indexOfBytes: [ "$item", "foo" ] },
+            }
+        }
+    ]
+  )
+*/
+@Test
+public void indexOfBytes() {
+  ProjectionOperation projectionOperation = Aggregation.project()
+    .and(StringOperators.valueOf("item").indexOf("foo")).as("byteLocation");
+
+  Aggregation aggregation = Aggregation.newAggregation(
+    projectionOperation
+  );
+
+  mongoTemplate.aggregate(aggregation, "inventory", Inventory.class);
+}
+
+/*
+	{ "_id" : 1, "byteLocation" : "0" }
+	{ "_id" : 2, "byteLocation" : "4" }
+	{ "_id" : 3, "byteLocation" : "4" }
+	{ "_id" : 4, "byteLocation" : "-1" }
+	{ "_id" : 5, "byteLocation" : null }
+	{ "_id" : 6, "byteLocation" : null }
+*/
+
+```
+
+# $indexOfCP
+
+```java
+{ "_id" : 1, "item" : "foo" }
+{ "_id" : 2, "item" : "fóofoo" }
+{ "_id" : 3, "item" : "the foo bar" }
+{ "_id" : 4, "item" : "hello world fóo" }
+{ "_id" : 5, "item" : null }
+{ "_id" : 6, "amount" : 3 }
+```
+
+```java
+/*
+  db.inventory.aggregate(
+    [
+      {
+        $project:
+            {
+              cpLocation: { $indexOfCP: [ "$item", "foo" ] },
+            }
+        }
+    ]
+  )
+*/
+@Test
+public void indexOfCP() {
+  ProjectionOperation projectionOperation = Aggregation.project()
+    .and(StringOperators.valueOf("item").indexOfCP("foo")).as("cpLocation");
+
+  Aggregation aggregation = Aggregation.newAggregation(
+    projectionOperation
+  );
+
+  mongoTemplate.aggregate(aggregation, "inventory", Inventory.class);
+}
+
+/*
+	{ "_id" : 1, "cpLocation" : "0" }
+	{ "_id" : 2, "cpLocation" : "3" }
+	{ "_id" : 3, "cpLocation" : "4" }
+	{ "_id" : 4, "cpLocation" : "-1" }
+	{ "_id" : 5, "cpLocation" : null }
+	{ "_id" : 6, "cpLocation" : null }
+*/
+```

@@ -316,3 +316,51 @@ public void indexOfCP() {
 	{ "_id" : 6, "cpLocation" : null }
 */
 ```
+
+# $split
+
+```java
+{ "_id" : 1, "country": "NA", "city" : "Berkeley, CA", "qty" : 648 }
+{ "_id" : 2, "country": "NA", "city" : "Bend, OR", "qty" : 491 }
+{ "_id" : 3, "country": "NA", "city" : "Kensington, CA", "qty" : 233 }
+{ "_id" : 4, "country": "NA", "city" : "Eugene, OR", "qty" : 842 }
+{ "_id" : 5, "country": "NA", "city" : "Reno, NV", "qty" : 655 }
+{ "_id" : 6, "country": "NA", "city" : "Portland, OR", "qty" : 408 }
+{ "_id" : 7, "country": "NA", "city" : "Sacramento, CA", "qty" : 574 }
+```
+
+```java
+/*
+  db.deliveries.aggregate([
+    { $project : { country: 1, city_state : { $split: ["$city", ", "] }, qty : 1 } },
+    { $unwind : "$city_state" },
+    { $match : { city_state : /[A-Z]{2}/ } },
+    { $group : { _id: { "country" : "$country", "state" : "$city_state" }, total_qty : { "$sum" : "$qty" } } },
+    { $sort : { total_qty : -1 } }
+  ]);
+*/
+@Test
+public void split() {
+  Aggregation aggregation = Aggregation.newAggregation(
+    Aggregation.project()
+      .andInclude("country")
+      .and(StringOperators.valueOf("city").split(", ")).as("city_state")
+      .andInclude("qty"),
+    Aggregation.unwind("city_state"),
+    Aggregation.match(Criteria.where("city").regex("[A-Z]{2}")),
+    Aggregation.group(Fields.fields()
+        .and("country")
+        .and("state", "city_state"))
+      .sum("qty").as("total_qty"),
+    Aggregation.sort(Sort.Direction.DESC, "total_qty")
+  );
+
+  mongoTemplate.aggregate(aggregation, "deliveries", Delivery.class);
+}
+
+/*
+	{ "_id" : { "country": "NA", "state" : "OR" }, "total_qty" : 1741 }
+	{ "_id" : { "country": "NA", "state" : "CA" }, "total_qty" : 1455 }
+	{ "_id" : { "country": "NA", "state" : "NV" }, "total_qty" : 655 }
+*/
+```

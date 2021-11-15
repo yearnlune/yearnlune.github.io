@@ -14,6 +14,8 @@ docs:
         url: /categories/#general
       - title: "Java"
         url: /categories/#java
+      - title: "Kotlin"
+        url: /categories/#kotlin
       - title: "JavaScript"
         url: /categories/#javascript
       - title: "Node.js"

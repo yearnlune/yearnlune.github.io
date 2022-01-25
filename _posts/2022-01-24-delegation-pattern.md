@@ -25,7 +25,7 @@ Delegation Pattern은 합성(Composition)관계를 이용하여 다른 객체에
 
    특정 인터페이스를 사용하는 작업에서 다른 인터페이스의 일을 위임하여 특정 인터페이스에 맞게 동작하게 만들 수 있다. 예를 들어 C-type 충전기에 아이폰을 충전하기 위해 사용하는 C-type to Lightning 어댑터가 필요하다. **해당 어댑터가 라이트닝 타입의 일을 위임하여 처리한다.**
 
-
+    　
 2. **복잡한 클래스를 숨기는 용도로 사용**([Facade Pattern](https://en.wikipedia.org/wiki/Facade_pattern))할 수 있다.
 
    예를 들어 컴퓨터를 부팅하기 위한 CPU, Memory, Drive의 작업이 있다면 이를 숨기고 Computer.startComputer()로 표현 할 수 있을 것이다. 즉 **Computer클래스에게 CPU, Memory, Drive의 일을 위임하여 처리한다.**

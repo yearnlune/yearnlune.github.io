@@ -8,6 +8,7 @@ author_profile: true
 　
 # Tech Stack
 ![java](/assets/images/techstack/java.png)
+![kotlin](/assets/images/techstack/kotlin.png)
 ![spring](/assets/images/techstack/spring.png)
 ![gradle](/assets/images/techstack/gradle.png)
 ![ts](/assets/images/techstack/ts.png)
@@ -29,11 +30,5 @@ author_profile: true
 ![electron](/assets/images/techstack/electron.png)
 ![helm](/assets/images/techstack/helm.png)
 ![yaml](/assets/images/techstack/yaml.png)
-
-　
-# 2021 GOAL
-![kotlin](/assets/images/techstack/kotlin.png)
-![css3](/assets/images/techstack/css3.png)
-
 
 ---

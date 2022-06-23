@@ -126,6 +126,7 @@ blockquote {
 
 a {
   color: $muted-text-color;
+  text-decoration: underline dotted;
 
   &:focus {
     @extend %tab-focus;

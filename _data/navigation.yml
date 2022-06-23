@@ -18,6 +18,8 @@ docs:
         url: /categories/#kotlin
       - title: "JavaScript"
         url: /categories/#javascript
+      - title: "Spring"
+        url: /categories/#spring
       - title: "Node.js"
         url: /categories/#node
       - title: "Kubernetes"

@@ -404,3 +404,7 @@ fun orderCreateWithOperation() {
     MatcherAssert.assertThat(response.get().items?.sumOf { it.item.price * it.quantity }, CoreMatchers.`is`(Matchers.closeTo(26.65, 0.001)))
 }
 ```
+
+# 예제
+
+[spring-graphql-example](https://github.com/yearnlune/spring-graphql-example)

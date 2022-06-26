@@ -354,3 +354,7 @@ class GraphqlExceptionConfig : DataFetcherExceptionResolverAdapter() {
     }
 }
 ```
+
+# 예제
+
+[spring-graphql-example](https://github.com/yearnlune/spring-graphql-example)

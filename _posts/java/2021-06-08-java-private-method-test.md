@@ -24,19 +24,19 @@ categories:
 // 예시 Class
 public class Calculator {
 
-	public int findMaxValue(int[] numbers) {
-		int maxValue = Integer.MIN_VALUE;
+    public int findMaxValue(int[] numbers) {
+        int maxValue = Integer.MIN_VALUE;
 
-		for (int i = 0; i < numbers.length; i++) {
-			maxValue = max(maxValue, numbers[i]);
-		}
+        for (int i = 0; i < numbers.length; i++) {
+            maxValue = max(maxValue, numbers[i]);
+        }
 
-		return maxValue;
-	}
+        return maxValue;
+    }
 
-	private int max(int a, int b) {
-		return a > b ? a : b;
-	}
+    private int max(int a, int b) {
+        return a > b ? a : b;
+    }
 }
 ```
 
@@ -50,19 +50,19 @@ Private method는 따로 테스트를 진행하지 않는다. 해당 Private Met
 ```java
 public class CalculatorTest {
 
-	Calculator calculator = new Calculator();
+    Calculator calculator = new Calculator();
 
-	@Test
-	public void findMaxValue_sourceGreaterThanTarget_ShouldBeReturnedMaxValue() throws Exception {
-		/* GIVEN */
-		int[] numbers = {5, 10};
+    @Test
+    public void findMaxValue_sourceGreaterThanTarget_ShouldBeReturnedMaxValue() throws Exception {
+        /* GIVEN */
+        int[] numbers = {5, 10};
 
-		/* WHEN */
-		int maxValue = calculator.findMaxValue(numbers);
+        /* WHEN */
+        int maxValue = calculator.findMaxValue(numbers);
 
-		/* THEN */
-		assertThat(maxValue, is(10));
-	}
+        /* THEN */
+        assertThat(maxValue, is(10));
+    }
 }
 ```
 
@@ -75,24 +75,24 @@ public class CalculatorTest {
 
 public class CalculatorTest {
 
-	Calculator calculator = new Calculator();
+    Calculator calculator = new Calculator();
 
-	@Test
-	public void max_sourceGreaterThanTarget_ShouldBeReturnedSource() throws Exception {
-		/* REFLECTION */
-		Method maxMethod = Calculator.class.getDeclaredMethod("max", int.class, int.class);
-		maxMethod.setAccessible(true);
+    @Test
+    public void max_sourceGreaterThanTarget_ShouldBeReturnedSource() throws Exception {
+        /* REFLECTION */
+        Method maxMethod = Calculator.class.getDeclaredMethod("max", int.class, int.class);
+        maxMethod.setAccessible(true);
 
-		/* GIVEN */
-		int source = 10;
-		int target = 5;
+        /* GIVEN */
+        int source = 10;
+        int target = 5;
 
-		/* WHEN */
-		int maxValue = (int)maxMethod.invoke(calculator, source, target);
+        /* WHEN */
+        int maxValue = (int)maxMethod.invoke(calculator, source, target);
 
-		/* THEN */
-		assertThat(maxValue, is(source));
-	}
+        /* THEN */
+        assertThat(maxValue, is(source));
+    }
 }
 ```
 
@@ -104,51 +104,58 @@ Spring Framework에서는 `ReflectionTestUtils`를 지원해준다.
 ```java
 public class CalculatorTest {
 
-	Calculator calculator = new Calculator();
+    Calculator calculator = new Calculator();
 
-	@Test
-	public void max_sourceGreaterThanTarget_ShouldBeReturnedSource() throws Exception {
-		/* GIVEN */
-		int source = 10;
-		int target = 5;
+    @Test
+    public void max_sourceGreaterThanTarget_ShouldBeReturnedSource() throws Exception {
+        /* GIVEN */
+        int source = 10;
+        int target = 5;
 
-		/* WHEN */
-		int maxValue = ReflectionTestUtils.invokeMethod(calculator, "max", source, target);
+        /* WHEN */
+        int maxValue = ReflectionTestUtils.invokeMethod(calculator, "max", source, target);
 
-		/* THEN */
-		assertThat(maxValue, is(source));
-	}
+        /* THEN */
+        assertThat(maxValue, is(source));
+    }
 }
 ```
 
 　
 ### @VisibleForTesting
 
-Google에서 제공하는 자바 공통 라이브러리인 guava에서는 @VisibleForTesting을 지원해준다. 위에서 살펴본 방식과는 달리 테스트를 위해서 패키지내 접근 가능한(Package-private) 메소드로 설정하고, 테스트에 활용한다. 해당 메소드의 접근지정자가 Package-private인 이유를 알리기 위해(가시성) 해당 annotation을 사용한다.
+Google에서 제공하는 자바 공통 라이브러리인 guava에서는 @VisibleForTesting을 지원해준다. 위에서 살펴본 방식과는 달리 테스트를 위해서 **패키지내 접근 가능**한(Package-private) 메소드로 설정하고, 테스트에 활용한다. 해당 메소드의 접근지정자가 Package-private인 이유를 알리기 위해(가시성) 해당 annotation을 사용한다.
 
 ```java
-@VisibleForTesting
-int max(int a, int b) {
-	return a > b ? a : b;
+package io.github.yearnlune.private.method.example;
+
+public class Calculator {
+
+    @VisibleForTesting
+    int max(int a, int b) {
+        return a > b ? a : b;
+    }
 }
 ```
 
 ```java
+package io.github.yearnlune.private.method.example;
+
 public class CalculatorTest {
 
-	Calculator calculator = new Calculator();
+    Calculator calculator = new Calculator();
 
-	@Test
-	public void max_sourceGreaterThanTarget_ShouldBeReturnedSource() throws Exception {
-		/* GIVEN */
-		int source = 10;
-		int target = 5;
+    @Test
+    public void max_sourceGreaterThanTarget_ShouldBeReturnedSource() throws Exception {
+        /* GIVEN */
+        int source = 10;
+        int target = 5;
 
-		/* WHEN */
-		int maxValue = calculator.max(source, target);
+        /* WHEN */
+        int maxValue = calculator.max(source, target);
 
-		/* THEN */
-		assertThat(maxValue, is(source));
-	}
+        /* THEN */
+        assertThat(maxValue, is(source));
+    }
 }
 ```

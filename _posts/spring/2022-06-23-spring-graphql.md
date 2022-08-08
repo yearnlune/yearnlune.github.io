@@ -2,6 +2,7 @@
 tags:
 - graphql
 - spring
+- spring-boot
 - spring-graphql
 - kotlin
 title: spring-graphql 
@@ -15,7 +16,7 @@ categories:
 
 　
 
-기존에 grpahql을 활용한 Spring boot 서비스를 개발하기 위해서 `com.graphql-java` 나 `com.graphql-java-kickstart` 에서 지원해주는 라이브러리를 사용하였다. 
+기존에 graphql을 활용한 Spring boot 서비스를 개발하기 위해서 `com.graphql-java` 나 `com.graphql-java-kickstart` 에서 지원해주는 라이브러리를 사용하였다. 
 이제 [스프링부트 2.7.0 버전](https://github.com/spring-projects/spring-boot/releases/tag/v2.7.0)이 릴리즈되면서 
 [spring-graphql](https://github.com/spring-projects/spring-graphql/releases/tag/v1.0.0)도 정식으로 지원하게 되었다. 해당 spring-graphql 를 활용하여 백엔드 서비스를 개발해보자.
 

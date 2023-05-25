@@ -85,7 +85,7 @@ db.getCollection('users').aggregate([
         { $count: 'count' },
       ]
   } },
-  { $project: { total: { $arrayElemAt: ['$total.count', 0] } } }
+  { $addFields: { total: { $arrayElemAt: ['$total.count', 0] } } }
 ])
 ```
 

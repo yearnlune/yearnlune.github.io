@@ -34,7 +34,7 @@ WireMock은 HTTP 기반 API 서비스를 테스트하기 위한 도구입니다.
 
 **예시 프로젝트**
 
-https://github.com/yearnlune/wiremock-example
+[wiremock-example](https://github.com/yearnlune/wiremock-example)
 
 ## Gradle
 

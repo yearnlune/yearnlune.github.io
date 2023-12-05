@@ -6,7 +6,7 @@ tags:
 title: 나의 모듈 여정
 date: 2023/11/28
 author: 김동환
-description: 지금 까지의 프로젝트 모듈 여정 기록
+description: 지금까지의 프로젝트 모듈 여정 기록
 disabled: false
 categories:
     - general

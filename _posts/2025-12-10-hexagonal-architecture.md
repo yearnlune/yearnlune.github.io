@@ -6,7 +6,7 @@ tags:
     - domain driven design
     - kotlin
     - spring boot
-title: 내가 선호하는 헥사고날 아키텍처 구조: 실전 경험에서 얻은 인사이트
+title: "내가 선호하는 헥사고날 아키텍처 구조: 실전 경험에서 얻은 인사이트"
 date: 2025/12/10
 author: 김동환
 description: 실제 프로젝트를 통해 경험한 헥사고날 아키텍처 기반의 구조와 그 설계 원칙에 대해 공유

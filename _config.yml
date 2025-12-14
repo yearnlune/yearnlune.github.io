@@ -12,16 +12,16 @@
 
 theme                    : jekyll-theme-minimal
 #remote_theme             : "mmistakes/minimal-mistakes@4.18.1"
-minimal_mistakes_skin    :  "contrast" # "default" "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+minimal_mistakes_skin    :  "dark" # "default" "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
 locale                   : "en-US"
 title                    : "꿈공장"
 title_separator          : "-"
 name                     : "DONGHWAN, KIM"
-description              : "An amazing website."
+description              : "Backend / Kotlin / Spring / Architecture"
 url                      : "https://yearnlune.github.io"
-baseurl                  : "/"
+baseurl                  : ""
 repository               : "yearnlune/comments"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 logo                     : # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"

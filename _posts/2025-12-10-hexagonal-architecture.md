@@ -177,17 +177,11 @@ Client는 해당 도메인의 `application` 레이어에 정의하고, 다른 �
 
 ```kotlin
 // user/application/UserClient.kt
-interface UserClient {
-    fun getUserById(userId: Long): UserDto
-    fun existsUser(userId: Long): Boolean
-    // ...
-}
-
 @Component
 class UserClient(
     private val userRepository: UserRepository,
-) : UserClient {
-    override fun getUserById(userId: Long): UserDto {
+) {
+    fun getUserById(userId: Long): UserDto {
         val user = userRepository.findByIdOrNull(userId)
             ?: throw AnyException(ErrorCode.USER_NOT_FOUND, mapOf("userId" to userId))
         
@@ -198,7 +192,7 @@ class UserClient(
         )
     }
     
-    override fun existsUser(userId: Long): Boolean {
+    fun existsUser(userId: Long): Boolean {
         return userRepository.existsById(userId)
     }
 }
@@ -260,8 +254,3 @@ class OrderService(
 이 구조가 완벽하다고 생각하지 않는다. 앞으로도 계속 개선해 나갈 것이다. 하지만 지금까지 이 구조로 개발하면서 느낀 점은, **명확한 경계와 원칙이 있으면 코드를 이해하고 유지보수하는 것이 훨씬 수월하다**는 것이다.
 
 ---
-
-**참고:**
-- 이 구조는 Kotlin + Spring Boot 기반 프로젝트에서 적용 가능하다
-- 아키텍처에 대한 피드백과 의견은 언제나 환영한다
-

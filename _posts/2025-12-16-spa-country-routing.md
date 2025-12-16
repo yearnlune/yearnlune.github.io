@@ -1,9 +1,17 @@
 ---
-title: SPA 국가별 라우팅 설계
+tags: 
+    - cloudfront
+    - spa
+    - seo
+    - routing
+title: "SPA 국가별 라우팅 설계"
+date: 2025/12/16
+author: 김동환
 description: CloudFront Functions를 이용한 일본 사용자 분기 처리와 그 과정에서의 선택
-date: 2025-12-16
-categories: [AWS, Frontend]
-tags: [cloudfront, spa, seo, routing]
+disabled: false
+categories:
+    - AWS
+    - Frontend
 ---
 
 SPA 서비스를 운영하다 보면 SEO를 위해 국가별로 URL 구조를 분리해야 하는 상황이 생긴다. 우리는 일본 시장 진출을 앞두고 `/jp` 경로를 통한 국가별 분기를 구현해야 했다.

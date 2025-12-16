@@ -77,11 +77,11 @@
     padding: 1.2em;
     border-radius: 6px;
     overflow-x: auto;
-    font-size: 0.9em;
+    font-size: 0.98em;
     line-height: 1.6;
-    
+
     code {
-      font-size: 0.9em;
+      font-size: 1em;
     }
   }
   
@@ -155,8 +155,8 @@
 .page__content {
   ul, ol {
     li {
-      margin-bottom: 0.8em;
-      
+      margin-bottom: 1em;
+
       p {
         margin-bottom: 0.5em;
       }
@@ -176,6 +176,34 @@
     margin: 2.5em 0;
     border: 0;
     border-top: 1px solid $border-color;
+  }
+}
+
+/* 이미지 반응형 스타일 */
+.page__content {
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1.5em auto;
+    border-radius: 4px;
+
+    // 이미지에 캡션이 있는 경우
+    & + em {
+      display: block;
+      text-align: center;
+      font-size: 0.9em;
+      color: $muted-text-color;
+      margin-top: -1em;
+      margin-bottom: 1.5em;
+    }
+  }
+
+  // 인라인 이미지 (작은 아이콘 등)
+  p img {
+    display: inline-block;
+    margin: 0 0.2em;
+    vertical-align: middle;
   }
 }
 

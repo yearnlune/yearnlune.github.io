@@ -4,7 +4,7 @@ tags:
     - spa
     - seo
     - routing
-title: "SPA 국가별 라우팅 설계"
+title: "SPA 국가별 라우팅 선택"
 date: 2025/12/16
 author: 김동환
 description: CloudFront Functions를 이용한 일본 사용자 분기 처리와 그 과정에서의 선택

@@ -208,6 +208,21 @@
   margin-bottom: 2em;
 }
 
+/* 포스트 목록 제목 색상 개선 */
+.archive__item-title {
+  a {
+    color: $text-color !important;
+    
+    &:hover {
+      color: $primary-color !important;
+    }
+    
+    &:visited {
+      color: $text-color !important;
+    }
+  }
+}
+
 /* 반응형 조정 - 모바일(핸드폰)에서도 가독성 유지 */
 @media (max-width: 768px) {
   body {

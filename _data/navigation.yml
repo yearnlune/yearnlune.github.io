@@ -10,21 +10,30 @@ main:
 docs:
   - title: Dream Factory
     children:
-      - title: "General"
-        url: /categories/#general
+      # 백엔드 핵심
       - title: "Java"
         url: /categories/#java
       - title: "Kotlin"
         url: /categories/#kotlin
-      - title: "JavaScript"
-        url: /categories/#javascript
       - title: "Spring"
         url: /categories/#spring
-      - title: "Node.js"
-        url: /categories/#node
+      # 인프라/운영
+      - title: "AWS"
+        url: /categories/#aws
       - title: "Kubernetes"
         url: /categories/#kubernetes
       - title: "MariaDB"
         url: /categories/#mariadb
+      # 프론트엔드/기타
+      - title: "JavaScript"
+        url: /categories/#javascript
+      - title: "Frontend"
+        url: /categories/#frontend
+      - title: "Node.js"
+        url: /categories/#node
+      # 도구
       - title: "Git"
         url: /categories/#git
+      # 기타
+      - title: "General"
+        url: /categories/#general

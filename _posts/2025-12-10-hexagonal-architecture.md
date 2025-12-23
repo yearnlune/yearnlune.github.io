@@ -24,8 +24,9 @@ categories:
 마이크로서비스는 과한가? 레이어드 아키텍처면 충분한가?  
 DDD는 어디까지 적용해야 하는가?
 
-이번 글에서는 실제 프로젝트를 진행하며 경험한  
-**헥사고날 아키텍처(Hexagonal Architecture)를 지향한 구조와 그 설계 원칙**을 공유하고자 한다.
+헥사고날 아키텍처(Hexagonal Architecture)를 완전하게 구현하기보다는,  
+실제 서비스 환경에서 **어디까지 적용하는 것이 합리적인지** 고민하며 선택한  
+구조와 설계 원칙을 공유하고자 한다.
 
 단순히 이론을 나열하기보다는,  
 개발 과정에서 실제로 부딪힌 문제와 그에 대한 선택,  
@@ -36,6 +37,15 @@ DDD는 어디까지 적용해야 하는가?
 본 프로젝트는 헥사고날 아키텍처를 **지향**하되,  
 모놀리식 환경에서 과도한 추상화를 피하고  
 **도메인 경계와 의존성 방향을 우선적으로 지키는 방식**을 선택했다.
+
+이 설계에서 가장 중요하게 둔 기준은 다음 세 가지였다.
+
+1. **도메인 규칙이 기술 변화에 휘둘리지 않도록 보호할 것**
+2. **변경 가능성이 낮은 지점에는 불필요한 추상화를 두지 않을 것**
+3. **구조 자체보다, 팀이 이해하고 유지할 수 있는 설명 가능한 구조일 것**
+
+이 기준을 바탕으로 헥사고날 아키텍처의 모든 요소를 적용하기보다는,  
+실제 프로젝트 맥락에 맞는 부분만 선택적으로 가져왔다.
 
 ### 레이어 구조
 
@@ -49,12 +59,16 @@ DDD는 어디까지 적용해야 하는가?
 └── infrastructure/  # 기술적 구현 (DB, Repository, 외부 API)
 ```
 
+이 구조는 전형적인 포트/어댑터를 모두 분리한 형태의 헥사고날은 아니다.  
+대신 레이어드 아키텍처를 기본으로 하되,  
+**의존성 방향과 도메인 보호라는 헥사고날의 핵심 원칙만을 선택적으로 적용**했다.
+
 ### 핵심 원칙
 
-- `domain` 레이어는 어떤 레이어에도 의존하지 않는다  
-- `application`은 도메인을 조합해 유스케이스를 완성한다  
-- `presentation`은 application만 호출한다  
-- `infrastructure`는 기술적 세부 사항을 담당한다  
+- `domain` 레이어는 어떤 레이어에도 의존하지 않는다
+- `application`은 도메인을 조합해 유스케이스를 완성한다
+- `presentation`은 application만 호출한다
+- `infrastructure`는 기술적 세부 사항을 담당한다
 
 헥사고날 아키텍처의 핵심은  
 **완벽한 포트 분리가 아니라, 의존성 방향과 경계의 명확성**이라고 생각한다.
@@ -102,6 +116,10 @@ order/
 인프라(DB, ORM)의 변경은 이론적으로는 가능하지만,  
 실제 프로젝트에서는 **거의 발생하지 않는 변화**이기 때문이다.
 
+특히 이 프로젝트는 단일 팀이 장기간 소유하며,  
+DB 기술을 교체할 가능성이 매우 낮은 서비스라는 점도  
+이 판단에 영향을 주었다.
+
 DB 변경은 단순히 Repository 구현을 교체하는 문제가 아니라,
 
 - 쿼리 구조
@@ -110,6 +128,9 @@ DB 변경은 단순히 Repository 구현을 교체하는 문제가 아니라,
 - 성능 튜닝
 
 까지 포함한 **대규모 수정**을 수반한다.
+
+실제로 구현 초반에는 DDD 교과서처럼 Repository 인터페이스를 domain에 두는 구조도 시도했지만,
+몇 개의 유스케이스를 구현하는 과정에서 이 추상화가 실질적인 이점을 주지는 않는다고 느꼈다.
 
 Repository 인터페이스 하나로 이 변경을 흡수할 수 있다고 보지 않았고,  
 오히려 불필요한 추상화가 될 가능성이 높다고 판단했다.
@@ -130,6 +151,11 @@ class OrderRepository(
 
 이는 헥사고날 아키텍처를 부정한 것이 아니라,  
 **모놀리식 환경에서 변경 가능성이 낮은 지점에 대한 의도적인 트레이드오프**다.
+
+이 선택의 대가는,  
+도메인 레이어가 영속성 기술(JPA)에 대해 완전히 무지하지는 않다는 점이다.  
+하지만 이 프로젝트에서는 그 비용보다  
+불필요한 추상화를 줄이고 구조를 단순하게 유지하는 이점이 더 크다고 판단했다.
 
 ## 애그리게잇 분리 전략: 트래픽 패턴을 고려한 설계
 
@@ -189,24 +215,59 @@ class Order(
 )
 ```
 
-## 도메인 간 통신: Facade 패턴
+## UseCase의 역할: 단일 진입점
 
-다른 도메인의 정보가 필요할 때는  
-**해당 도메인이 제공하는 Facade를 통해서만 접근**한다.
+처음에는 단순히 Service 계층으로 충분하지 않을까 고민했지만,
+비즈니스 흐름이 길어질수록 호출 규칙을 강제할 필요성을 느끼게 되었다.
 
-이는 “외부 호출(Client)”이 아니라  
-**도메인이 외부에 제공하는 공식 진입점**이라는 의미다.
+이 글에서의 UseCase는 
+**비즈니스 흐름을 조율하는 오케스트레이션 단위**이며,  
+CommandService / QueryService는  
+**도메인 간 통신을 위한 제한된 인터페이스**에 가깝다.
+
+이 프로젝트는 MSA 환경처럼 도메인이 강하게 분리된 구조가 아니라,  
+모놀리식 구조 안에서 도메인 경계와 의존성 방향을 관리하는 것을 목표로 했다.  
+그 과정에서 이벤트 기반 통신 역시 내부적으로 사용하고 있지만,  
+이 글에서는 헥사고날 아키텍처의 구조적 설명에 집중하기 위해  
+의도적으로 다루지 않았다.
+
+이러한 맥락에서  
+**명시적인 호출 구조를 유지하면서도 경계를 지킬 수 있는 방법**으로  
+CQRS 패턴을 UseCase 중심의 진입 구조로 우선 선택했다.
+
+- Controller / Scheduler / Listener → 항상 UseCase만 호출
+- UseCase는 다음을 할 수 있음:
+  - 같은 도메인의 다른 UseCase 호출
+  - 다른 도메인의 QueryService / CommandService 호출
+- ❌ 타 도메인의 UseCase 직접 호출 금지
+
+## 도메인 간 통신: CQRS 패턴
+
+다른 도메인의 정보가 필요할 때는 **CQRS 서비스만 허용**한다.
+
+### 호출 경로
+
+```
+Controller → UseCase → (같은 도메인 다른 UseCase / 다른 도메인 QueryService/CommandService)
+```
+
+### QueryService 규칙
+
+- 반환: Snapshot / View / Summary
+- JPA 연결 ❌ (더티 체킹 방지)
+- 엔티티 반환 ❌
+- 외부 도메인 호출 허용 ✅
 
 ```kotlin
 @Service
-class UserForOrderFacade(
+class UserQueryService(
     private val userRepository: UserRepository,
 ) {
-    fun getUserById(userId: Long): UserDto {
+    fun getUserById(userId: Long): UserSnapshot {
         val user = userRepository.findByIdOrNull(userId)
             ?: throw UserNotFoundException(userId)
 
-        return UserDto(
+        return UserSnapshot(
             id = user.id,
             name = user.name,
             email = user.email,
@@ -215,14 +276,48 @@ class UserForOrderFacade(
 }
 ```
 
+### CommandService 규칙
+
+- 입력: ~Command
+- 출력: ~Result / id / Unit
+- 엔티티 파라미터 ❌
+- 엔티티 반환 ❌
+- 엔티티 조작은 내부에서만
+
+```kotlin
+@Service
+class UserCommandService(
+    private val userRepository: UserRepository,
+) {
+    fun createUser(command: CreateUserCommand): CreateUserResult {
+        val user = User(command.name, command.email)
+        val saved = userRepository.save(user)
+        return CreateUserResult(saved.id)
+    }
+}
+```
+
+### 내부 도메인에서도 CQRS 사용 가능
+
+같은 도메인 안에서도 CommandService / QueryService 분리 사용 가능하다.
+
 ## 마무리: 균형 있는 설계
 
-이 구조는 처음부터 완벽하게 설계된 것이 아니다.  
-문제를 해결해 나가며 **점진적으로 개선된 결과**다.
+돌이켜보면 모든 선택이 처음부터 명확했던 것은 아니다.  
+구현을 진행하며 여러 번 구조를 되돌려보고,  
+일부는 과감히 포기하기도 했다.
 
-중요하다고 생각하는 원칙은 다음과 같다.
+그 과정에서 중요하다고 느낀 원칙은 다음과 같다.
 
 - 이론에 매몰되지 않기
 - 변경 가능성이 높은 지점에만 추상화 적용하기
 - 도메인 경계와 책임을 명확히 하기
 - 실용성과 확장성의 균형 잡기
+
+이 글에서는 메시지 기반 통신, 완전한 애그리게잇 간 이벤트 연동 등은  
+복잡도에 비해 현재 단계에서의 필요성이 낮다고 판단하여  
+의도적으로 다루지 않았다.
+
+이 구조가 항상 옳다고 생각하지는 않는다.  
+다만 이 시점의 요구사항과 팀 구성, 서비스 성격을 기준으로 볼 때  
+가장 설명 가능하고 유지 가능한 선택이었다고 판단했다.
